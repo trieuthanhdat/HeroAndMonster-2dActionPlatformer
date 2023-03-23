@@ -6,42 +6,36 @@ using UnityEngine;
 public class Sensor_AttackPoint : MonoBehaviour
 {
     public HeroKnight heroKnight;
+    public int forPointAttack = -1;
+
     private bool canHit = false;
-    private void Awake()
-    {
-        gameObject.SetActive(false);
-    }
     
-    private void OnEnable()
-    {
-        canHit = true;
-    }
-    /// <summary>
-    /// This function is called when the behaviour becomes disabled or inactive.
-    /// </summary>
-    private void OnDisable()
-    {
-        canHit = false;
-    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-         Debug.Log("ONCOLLISION ATTACK: ");
-        if(other.gameObject.CompareTag("Enemy") && canHit)
+        if (other.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<Health>().TakeDamage(heroKnight.gameObject, heroKnight.damagePoint);
-            Debug.Log("ATTACK: enemy "+ other.gameObject.name + " damage Point "+heroKnight.damagePoint);
-            canHit = false;
+            Health enemyHealth = other.GetComponent<Health>();
+            if (enemyHealth && !heroKnight.enemies.Contains(enemyHealth))
+            {
+                heroKnight.enemies.Add(enemyHealth);
+                canHit = true;
+            }
         }
     }
-    private void OnTriggerStay2D(Collider2D other)
+    
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Enemy") && canHit)
+        if (other.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<Health>().TakeDamage(heroKnight.gameObject, heroKnight.damagePoint);
-            canHit = false;
+            Health enemyHealth = other.GetComponent<Health>();
+            if (enemyHealth)
+            {
+                heroKnight.enemies.Remove(enemyHealth);
+            }
+            canHit = heroKnight.enemies.Count > 0;
         }
     }
-
    
    
 }

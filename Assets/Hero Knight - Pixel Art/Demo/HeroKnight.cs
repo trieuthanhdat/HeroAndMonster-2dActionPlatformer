@@ -2,6 +2,9 @@
 using System.Collections;
 using System;
 using RPG.Resources;
+using System.Linq;
+using System.Collections.Generic;
+
 public class HeroKnight : MonoBehaviour {
 
     [SerializeField] float      m_speed = 4.0f;
@@ -12,7 +15,8 @@ public class HeroKnight : MonoBehaviour {
     [SerializeField] GameObject m_AttackPointHolder;
     
 
-    public float damagePoint = 10;
+    [SerializeField] float m_basicDamagePoint = 10;
+    [SerializeField] float m_specialDamagePoint = 20;
 
     private Animator            m_animator;
     private Rigidbody2D         m_body2d;
@@ -32,8 +36,9 @@ public class HeroKnight : MonoBehaviour {
     private float               m_dashDuration = 8.0f / 14.0f;
     private float               m_dashCurrentTime;
     private Health              m_health = null;
-
-
+    private List<Sensor_AttackPoint> m_sensorAttackPoints = new List<Sensor_AttackPoint>();
+    [HideInInspector]
+    public List<Health> enemies = new List<Health>();
     // Use this for initialization
     void Start ()
     {
@@ -45,6 +50,8 @@ public class HeroKnight : MonoBehaviour {
         m_wallSensorR2 = transform.Find("WallSensor_R2").GetComponent<Sensor_HeroKnight>();
         m_wallSensorL1 = transform.Find("WallSensor_L1").GetComponent<Sensor_HeroKnight>();
         m_wallSensorL2 = transform.Find("WallSensor_L2").GetComponent<Sensor_HeroKnight>();
+
+        m_sensorAttackPoints = m_AttackPointHolder.GetComponentsInChildren<Sensor_AttackPoint>().ToList();
     }
 
     // Update is called once per frame
@@ -203,10 +210,10 @@ public class HeroKnight : MonoBehaviour {
 
         // Call one of three attack animations "Attack1", "Attack2", "Attack3"
         m_animator.SetTrigger("Attack" + m_currentAttack);
-
         // Reset timer
         m_timeSinceAttack = 0.0f;
     }
+    
     private void HandleBlock()
     {
          m_animator.SetTrigger("Block");
@@ -254,6 +261,18 @@ public class HeroKnight : MonoBehaviour {
             m_body2d.velocity = new Vector2(inputX * m_speed, m_body2d.velocity.y);
 
     }
+
+    private void HitEnemy(float damage)
+    {
+        foreach (Health enemyHealth in enemies)
+        {
+            if (enemyHealth)
+            {
+                enemyHealth.TakeDamage(gameObject, damage);
+                enemyHealth.GetComponent<Rigidbody2D>().AddForce(new Vector2(m_facingDirection * 10, 0));
+            }
+        }
+    }
     ///--- Animation Events ---///
     // Called in slide animation.
     void AE_SlideDust()
@@ -271,6 +290,17 @@ public class HeroKnight : MonoBehaviour {
             GameObject dust = Instantiate(m_slideDust, spawnPosition, gameObject.transform.localRotation) as GameObject;
             // Turn arrow in correct direction
             dust.transform.localScale = new Vector3(m_facingDirection, 1, 1);
+        }
+    }
+    
+    public void HandleAttackHit(int pointAttack)
+    {
+        foreach(Sensor_AttackPoint sap in m_sensorAttackPoints.Where(sap => sap.forPointAttack == pointAttack))
+        {
+            if(pointAttack != 4)
+                HitEnemy(m_basicDamagePoint);
+            else
+                HitEnemy(m_specialDamagePoint);
         }
     }
     void ResetSpecialAttack()
