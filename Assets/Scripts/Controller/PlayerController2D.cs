@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerController2D : MonoBehaviour
 {
     private PlatformerMotor2D _motor;
+    private PlayerCombatController _playerCombatController;
     private bool _restored = true;
     private bool _enableOneWayPlatforms;
     private bool _oneWayPlatformsAreWalls;
@@ -15,6 +16,7 @@ public class PlayerController2D : MonoBehaviour
     void Start()
     {
         _motor = GetComponent<PlatformerMotor2D>();
+        _playerCombatController = GetComponent<PlayerCombatController>();
     }
 
     // before enter en freedom state for ladders
@@ -47,15 +49,20 @@ public class PlayerController2D : MonoBehaviour
             // try to restore, sometimes states are a bit messy because change too much in one frame
             FreedomStateRestore(_motor);
         }
+        HandleInput();
+        
+    }
 
-        // Jump?
+    private void HandleInput()
+    {
+// Jump?
         // If you want to jump in ladders, leave it here, otherwise move it down
         if (Input.GetButtonDown(PC2D.Input.JUMP))
         {
             _motor.Jump();
             _motor.DisableRestrictedArea();
         }
-
+        
         _motor.jumpingHeld = Input.GetButton(PC2D.Input.JUMP);
 
         // XY freedom movement
@@ -117,6 +124,10 @@ public class PlayerController2D : MonoBehaviour
         if (Input.GetButtonDown(PC2D.Input.DASH))
         {
             _motor.Dash();
+        }
+        if (Input.GetButtonDown(PC2D.Input.ATTACK))
+        {
+            _playerCombatController.Attack();
         }
     }
 }

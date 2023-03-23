@@ -312,6 +312,14 @@ public class PlatformerMotor2D : MonoBehaviour
     public Action onDash;
 
     /// <summary>
+    /// Delegate to attach to when the motor attacks.
+    /// </summary>
+    public Action onAttack;
+     /// <summary>
+    /// Delegate to attach to when the motor attack end.
+    /// </summary>
+    public Action onAttackEnd;
+    /// <summary>
     /// Delegate to attach to when the motor's dash ends.
     /// </summary>
     public Action onDashEnd;
@@ -382,6 +390,7 @@ public class PlatformerMotor2D : MonoBehaviour
         Dashing,
         Frozen,
         Slipping,
+        Attacking,
         FreedomState
     }
 
@@ -736,7 +745,6 @@ public class PlatformerMotor2D : MonoBehaviour
         _dashing.pressed = true;
         _dashing.dashWithDirection = false;
     }
-
     /// <summary>
     /// Forces the motor to dash regardless if the motor thinks it is valid or not.
     /// </summary>
@@ -931,6 +939,13 @@ public class PlatformerMotor2D : MonoBehaviour
         return motorState == MotorState.Dashing;
     }
 
+    ///<summary>
+    /// Is the motor Attacking?
+    ///</summary>
+    public bool IsAttacking()
+    {
+        return motorState == MotorState.Attacking;
+    }
     ///<summary>
     /// Is the motor Jumping? include walljumps and airjumps.
     ///</summary>
@@ -1168,6 +1183,18 @@ public class PlatformerMotor2D : MonoBehaviour
         public float gravityEnabledFrames;
     }
     private DashState _dashing = new DashState();
+
+    private class AttackStat
+    {
+        public bool pressed;
+        public float attackCooldown = 0.5f;
+        public int maxCombo = 3; // Maximum number of combo attacks allowed
+        public float comboTime = 0.5f; // Time limit between attacks to perform a combo
+        public bool isAttacking = false; // Flag to check if the character is attacking
+        public int comboCount = 0; // Current combo count
+        public float lastAttackTime = 0f; // Time of the last attack
+        public bool canCombo = false; 
+    }
 
     // Contains information for wall sticks, slides, and corner grabs.
     private class WallState
@@ -3418,7 +3445,7 @@ public class PlatformerMotor2D : MonoBehaviour
         }
     }
 
-    private void ChangeState(MotorState newState)
+    public void ChangeState(MotorState newState)
     {
         // no change...
         if (motorState == newState)
@@ -3447,6 +3474,13 @@ public class PlatformerMotor2D : MonoBehaviour
                 onDashEnd();
             }
         }
+        if(IsAttacking())
+        {
+            if(onAttackEnd != null)
+            {
+                onAttackEnd();
+            }
+        }
 
         // set
         motorState = newState;
@@ -3472,6 +3506,14 @@ public class PlatformerMotor2D : MonoBehaviour
                 onDash();
             }
         }
+        if(IsAttacking())
+        {
+            if(onAttack != null)
+            {
+                onAttack();
+            }
+        }
+        
     }
 
     #endregion

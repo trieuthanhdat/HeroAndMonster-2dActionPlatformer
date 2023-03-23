@@ -17,6 +17,7 @@ namespace PC2D
         private Animator _animator;
         private bool _isJumping;
         private bool _currentFacingLeft;
+        private PlayerCombatController _playerCombatController;
 
         // Use this for initialization
         void Start()
@@ -24,6 +25,7 @@ namespace PC2D
             _motor = GetComponent<PlatformerMotor2D>();
             _animator = visualChild.GetComponent<Animator>();
             _animator.Play("Idle");
+            _playerCombatController = GetComponent<PlayerCombatController>();
 
             _motor.onJump += SetCurrentFacingLeft;
         }
@@ -31,6 +33,7 @@ namespace PC2D
         // Update is called once per frame
         void Update()
         {
+           
             if (_motor.motorState == PlatformerMotor2D.MotorState.Jumping ||
                 _isJumping &&
                     (_motor.motorState == PlatformerMotor2D.MotorState.Falling ||
@@ -78,6 +81,9 @@ namespace PC2D
                 {
                     _animator.Play("Dash");
                 }
+                else if(_motor.motorState == PlatformerMotor2D.MotorState.Attacking)
+                {
+                }
                 else
                 {
                     if (_motor.velocity.sqrMagnitude >= 0.1f * 0.1f)
@@ -96,7 +102,8 @@ namespace PC2D
 
             if (_motor.motorState == PlatformerMotor2D.MotorState.Slipping ||
                 _motor.motorState == PlatformerMotor2D.MotorState.Dashing ||
-                _motor.motorState == PlatformerMotor2D.MotorState.Jumping)
+                _motor.motorState == PlatformerMotor2D.MotorState.Jumping ||
+                _motor.motorState == PlatformerMotor2D.MotorState.Attacking)
             {
                 valueCheck = _motor.velocity.x;
             }
