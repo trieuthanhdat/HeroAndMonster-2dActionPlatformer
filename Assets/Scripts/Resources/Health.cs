@@ -145,6 +145,9 @@ namespace RPG.Resources
                 GetComponent<ActionScheduler>().CancelCurrentAction();
                 animator.SetTrigger("Death");
                 // GetComponent<BoxCollider2D>().enabled = false;
+                
+                if(!gameObject.CompareTag("Player"))
+                    Destroy(gameObject, 5);
             }
             else if(wasDeadLastFrame && !IsDead())
             {

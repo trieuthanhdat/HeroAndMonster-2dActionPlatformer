@@ -13,7 +13,7 @@ public class HeroKnight : MonoBehaviour {
     [SerializeField] bool       m_noBlood = false;
     [SerializeField] GameObject m_slideDust;
     [SerializeField] GameObject m_AttackPointHolder;
-    
+    [SerializeField] int m_hitForce = 5;
 
     [SerializeField] float m_basicDamagePoint = 10;
     [SerializeField] float m_specialDamagePoint = 20;
@@ -39,6 +39,8 @@ public class HeroKnight : MonoBehaviour {
     private List<Sensor_AttackPoint> m_sensorAttackPoints = new List<Sensor_AttackPoint>();
     [HideInInspector]
     public List<Health> enemies = new List<Health>();
+    
+
     // Use this for initialization
     void Start ()
     {
@@ -57,6 +59,7 @@ public class HeroKnight : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        if(m_health.IsDead()) return;
         Timer();
         CheckGrounded();
         HandleInputAndMovement();
@@ -108,20 +111,9 @@ public class HeroKnight : MonoBehaviour {
         //Wall Slide
     //    HandleWallSlide();
 
-        //Death
-        if (Input.GetKeyDown("e") && !m_dashing)
-        {
-            HandleDeath();
-        }
-            
-        //Hurt
-        else if (Input.GetKeyDown("q") && !m_dashing)
-        {
-            HandleHurt();
-        }
 
         //Attack
-        else if(Input.GetButtonDown(PC2D.Input.ATTACK) && m_timeSinceAttack > 0.25f && !m_dashing && !m_isUsingSpecial)
+        if(Input.GetButtonDown(PC2D.Input.ATTACK) && m_timeSinceAttack > 0.25f && !m_dashing && !m_isUsingSpecial)
         {
             HandleAttack();
         }
@@ -230,7 +222,7 @@ public class HeroKnight : MonoBehaviour {
         m_dashing = true;
         m_animator.SetTrigger("Dash");
         m_dashCurrentTime = 0;
-        m_body2d.AddForce(new Vector2(m_facingDirection * m_rollForce, m_body2d.velocity.y));
+        m_body2d.velocity = new Vector2(m_facingDirection * m_rollForce, m_body2d.velocity.y);
     }
     private void Flip(float inputX)
     {
@@ -262,14 +254,14 @@ public class HeroKnight : MonoBehaviour {
 
     }
 
-    private void HitEnemy(float damage)
+    private void HitEnemy(float damage, float hitForce)
     {
         foreach (Health enemyHealth in enemies)
         {
             if (enemyHealth)
             {
                 enemyHealth.TakeDamage(gameObject, damage);
-                enemyHealth.GetComponent<Rigidbody2D>().AddForce(new Vector2(m_facingDirection * 10, 0));
+                enemyHealth.GetComponent<Rigidbody2D>().AddForce(new Vector2(m_facingDirection * hitForce , 0), ForceMode2D.Impulse);
             }
         }
     }
@@ -298,9 +290,9 @@ public class HeroKnight : MonoBehaviour {
         foreach(Sensor_AttackPoint sap in m_sensorAttackPoints.Where(sap => sap.forPointAttack == pointAttack))
         {
             if(pointAttack != 4)
-                HitEnemy(m_basicDamagePoint);
+                HitEnemy(m_basicDamagePoint, (m_hitForce * pointAttack)/10);
             else
-                HitEnemy(m_specialDamagePoint);
+                HitEnemy(m_specialDamagePoint, (m_hitForce * pointAttack)/10);
         }
     }
     void ResetSpecialAttack()

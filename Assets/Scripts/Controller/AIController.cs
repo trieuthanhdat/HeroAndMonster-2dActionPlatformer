@@ -1,3 +1,4 @@
+using System;
 using RPG.Resources;
 using UnityEngine;
 
@@ -23,17 +24,21 @@ public class AIController : MonoBehaviour
     private float lookAroundTimeRemaining = 0f;
     private Transform playerTransform;
     private Vector3 lastKnownPlayerPosition;
-    private Quaternion lastKnownPlayerRotation;
+    private SpriteRenderer enemySprite;
+    private Vector2 targetPosition;
+    private Health health ;
 
     private void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         lastKnownPlayerPosition = playerTransform.position;
-        lastKnownPlayerRotation = playerTransform.rotation;
+        enemySprite = GetComponent<SpriteRenderer>();
+        health = GetComponent<Health>();
     }
 
     private void Update()
     {
+        if(health.IsDead()) return;
         if (chasingPlayer)
         {
             ChasePlayer();
@@ -55,9 +60,11 @@ public class AIController : MonoBehaviour
     private void Patrol()
     {
         // Move towards the current patrol point
+        targetPosition = patrolPoints[currentPatrolPointIndex].position;
         Vector2 direction = (patrolPoints[currentPatrolPointIndex].position - transform.position).normalized;
         transform.Translate(direction * moveSpeed * Time.deltaTime, Space.World);
-        transform.LookAt(patrolPoints[currentPatrolPointIndex]);
+        // transform.LookAt(patrolPoints[currentPatrolPointIndex]);
+        Flip();
 
         // Check if the AI has reached the current patrol point
         if (Vector2.Distance(transform.position, patrolPoints[currentPatrolPointIndex].position) < 0.1f)
@@ -72,14 +79,23 @@ public class AIController : MonoBehaviour
         {
             chasingPlayer = true;
             lastKnownPlayerPosition = playerTransform.position;
-            lastKnownPlayerRotation = playerTransform.rotation;
+            targetPosition = lastKnownPlayerPosition;
         }
+    }
+
+    private void Flip()
+    {
+        Vector2 direction = targetPosition - (Vector2)transform.position;
+        if (direction.x < 0) 
+            enemySprite.flipX = true;
+        else
+            enemySprite.flipX = false;
     }
 
     private void StopAndLookAround()
     {
         // Stop moving and look around for a while
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), Time.deltaTime);
+        // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), Time.deltaTime);
         stopTimeRemaining -= Time.deltaTime;
 
         // Check if the AI can detect the player in its field of view
@@ -87,7 +103,6 @@ public class AIController : MonoBehaviour
         {
             chasingPlayer = true;
             lastKnownPlayerPosition = playerTransform.position;
-            lastKnownPlayerRotation = playerTransform.rotation;
         }
 
         // Check if the AI has finished looking around
@@ -102,7 +117,7 @@ public class AIController : MonoBehaviour
         // Move towards the last known position of the player
         Vector2 direction = (lastKnownPlayerPosition - transform.position).normalized;
         transform.Translate(direction * moveSpeed * Time.deltaTime, Space.World);
-        transform.LookAt(lastKnownPlayerPosition);
+        // transform.LookAt(lastKnownPlayerPosition);
 
         // Check if the AI has reached the player or lost sight of the player
         if (Vector2.Distance(transform.position, lastKnownPlayerPosition) < attackRange)
@@ -120,7 +135,6 @@ public class AIController : MonoBehaviour
         {
             // Player is not visible, but still within chase range, update last known position
             lastKnownPlayerPosition = playerTransform.position;
-            lastKnownPlayerRotation = playerTransform.rotation;
         }
     }
 

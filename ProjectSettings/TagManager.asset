@@ -11,11 +11,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - Ground
   - Water
   - UI
   - Enemy
-  - 
+  - Player
   - Static Environment
   - Moving Platforms
   - 
