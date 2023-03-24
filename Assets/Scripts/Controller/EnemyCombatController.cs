@@ -6,7 +6,6 @@ public class EnemyCombatController : CharacterCombatController
 {
     public float patrolDistance = 5f;
     public float attackRange = 1f;
-    public int attackDamage = 10;
     public float moveSpeed = 3f;
     private Transform player;
     private float distanceToPlayer;

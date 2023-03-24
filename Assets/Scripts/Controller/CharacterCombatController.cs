@@ -7,7 +7,7 @@ public abstract class CharacterCombatController : MonoBehaviour
 {
     
     public Rigidbody2D rb;
-    public float attackDamage = 10f;
+    public float hitDamage = 10f;
     public Animator animator;
 
     

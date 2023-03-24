@@ -1,67 +1,70 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RPG.Control;
-using System;
-using RPG.SceneManagement;
-using RPG.Core;
+using UnityEngine.UI;
 
-namespace RPG.UI
+public class PauseMenu : MonoBehaviour
 {
-    public class PauseMenu : MonoBehaviour
+    public GameObject pausePanel;
+    public Button resumeButton;
+    public Button restartButton;
+    public Button optionsButton;
+    public Button quitButton;
+
+    private bool isPaused;
+
+    void Start()
     {
-        private bool isPaused = false;
-        [SerializeField] PlayerController playerController ;
-        [SerializeField] GameObject notification;
-        // /// <summary>
-        // /// Awake is called when the script instance is being loaded.
-        // /// </summary>
-        // private void Awake()
-        // {
-        //     playerController = GameObject.FindObjectOfType<PlayerController>();
-        // }
-        private void OnEnable()
-        {
-           GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-        }
-        private void OnDisable()
-        {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-        }
-
-        private void OnGameStateChanged(GameState newState)
-        {
-            playerController.enabled = newState == GameState.Gameplay;
-            Time.timeScale = newState == GameState.Gameplay ? 1f : 0f;
-        }
-
-        
-        public void Save()
-        {
-            var savingWrapper = FindObjectOfType<SavingWrapper>();
-            savingWrapper.Save();
-            gameObject.SetActive(false);
-            if(notification != null)
-                notification.SetActive(true);
-        }
-        public void SaveAndQuit()
-        {
-            var savingWrapper = FindObjectOfType<SavingWrapper>();
-            savingWrapper.Save();
-            savingWrapper.LoadMenu();
-        }
-        public void QuitToDesktop()
-        {
-            var savingWrapper = FindObjectOfType<SavingWrapper>();
-            savingWrapper.Save();
-            
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
-        }
-
+        isPaused = false;
+        pausePanel.SetActive(false);
+        resumeButton.onClick.AddListener(ResumeGame);
+        restartButton.onClick.AddListener(RestartGame);
+        optionsButton.onClick.AddListener(OpenOptions);
+        quitButton.onClick.AddListener(QuitGame);
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!isPaused)
+            {
+                PauseGame();
+            }
+            else
+            {
+                ResumeGame();
+            }
+        }
+    }
+
+    public void PauseGame()
+    {
+        isPaused = true;
+        Time.timeScale = 0;
+        pausePanel.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        isPaused = false;
+        Time.timeScale = 1;
+        pausePanel.SetActive(false);
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void OpenOptions()
+    {
+        // Implement your options menu here
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
