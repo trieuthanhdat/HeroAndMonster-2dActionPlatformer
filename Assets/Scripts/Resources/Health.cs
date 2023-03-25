@@ -69,11 +69,12 @@ namespace RPG.Resources
             return GetComponent<BaseStats>().GetStats(Stats.Stats.health);
         }
        
-        public void TakeDamage(GameObject instigator, float damage)
+        public void TakeDamage(GameObject instigator, float damage, Animator targetDamage = null)
         {
             // debug
 
             healthPoints.value = Mathf.Max(healthPoints.value - damage, 0);
+            if(targetDamage) targetDamage.SetTrigger("Hurt");
             if(IsDead())
             {
                 OnDie.Invoke();

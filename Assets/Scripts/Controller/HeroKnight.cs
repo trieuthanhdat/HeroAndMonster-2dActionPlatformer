@@ -40,6 +40,7 @@ public class HeroKnight : MonoBehaviour {
     [HideInInspector]
     public List<Health> enemies = new List<Health>();
     
+    public Animator HeroAnimator { get => m_animator;}
     public int FaceDirection {get =>   m_facingDirection; set => m_facingDirection = value ;}
     // Use this for initialization
     void Start ()
@@ -167,6 +168,7 @@ public class HeroKnight : MonoBehaviour {
 
 
     ///---ANIMETION HANDLER---//
+    
     public void HandleHurt()
     {
         m_animator.SetTrigger("Hurt");
@@ -263,7 +265,7 @@ public class HeroKnight : MonoBehaviour {
         {
             if (enemyHealth)
             {
-                enemyHealth.TakeDamage(gameObject, damage);
+                enemyHealth.TakeDamage(gameObject, damage, enemyHealth.gameObject.GetComponent<IAIController>().animator);
                 enemyHealth.GetComponent<Rigidbody2D>().AddForce(new Vector2(m_facingDirection * hitForce , 0), ForceMode2D.Impulse);
             }
         }
