@@ -40,7 +40,7 @@ public class HeroKnight : MonoBehaviour {
     [HideInInspector]
     public List<Health> enemies = new List<Health>();
     
-
+    public int FaceDirection {get =>   m_facingDirection; set => m_facingDirection = value ;}
     // Use this for initialization
     void Start ()
     {
@@ -111,7 +111,10 @@ public class HeroKnight : MonoBehaviour {
         //Wall Slide
     //    HandleWallSlide();
 
-
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            HandleHurt();
+        }
         //Attack
         if(Input.GetButtonDown(PC2D.Input.ATTACK) && m_timeSinceAttack > 0.25f && !m_dashing && !m_isUsingSpecial)
         {

@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 8647340791253349127}
   - component: {fileID: 8369065985319742495}
   - component: {fileID: 2359919396279463573}
-  - component: {fileID: 2476190927892126390}
   - component: {fileID: 6691145538416269706}
   - component: {fileID: 6691145538416269717}
   - component: {fileID: 6691145538416269716}
   - component: {fileID: 6691145538416269719}
+  - component: {fileID: 7993797259964665368}
   m_Layer: 7
   m_Name: Player_hero
   m_TagString: Player
@@ -129,9 +129,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -397237201
+  m_SortingLayer: 3
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 4b7e607f11fc9684db7e37f12db062c4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -164,32 +164,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &2476190927892126390
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 799921789731657632}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.6204127}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.12962966}
-    oldSize: {x: 1.65, y: 1.65}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.73, y: 1.2831748}
-  m_EdgeRadius: 0
 --- !u!114 &6691145538416269706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +257,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb29fb4cdd4c5e14cb59027fb88888fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &7993797259964665368
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799921789731657632}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.010620713, y: 0.51552266}
+  m_Size: {x: 0.4816978, y: 1.0764698}
+  m_Direction: 0
 --- !u!1 &1642823442137932458
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,6 +967,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BarOfHealth
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710753742890773291, guid: 40d1fc440c24f9542b58f0d88c234ea5,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -397237201
       objectReference: {fileID: 0}
     - target: {fileID: 8320589155217318177, guid: 40d1fc440c24f9542b58f0d88c234ea5,
         type: 3}

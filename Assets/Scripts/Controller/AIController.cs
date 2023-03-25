@@ -27,16 +27,18 @@ public class AIController : MonoBehaviour
     private SpriteRenderer enemySprite;
     private Vector2 targetPosition;
     private Health health ;
+    private Animator animator;
 
-    private void Start()
+    public virtual void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         lastKnownPlayerPosition = playerTransform.position;
         enemySprite = GetComponent<SpriteRenderer>();
         health = GetComponent<Health>();
+        animator= GetComponent<Animator>();
     }
 
-    private void Update()
+    public virtual void Update()
     {
         if(health.IsDead()) return;
         if (chasingPlayer)
@@ -57,7 +59,7 @@ public class AIController : MonoBehaviour
         }
     }
 
-    private void Patrol()
+    public virtual void Patrol()
     {
         // Move towards the current patrol point
         targetPosition = patrolPoints[currentPatrolPointIndex].position;
@@ -83,7 +85,7 @@ public class AIController : MonoBehaviour
         }
     }
 
-    private void Flip()
+    public virtual void Flip()
     {
         Vector2 direction = targetPosition - (Vector2)transform.position;
         if (direction.x < 0) 
@@ -92,7 +94,7 @@ public class AIController : MonoBehaviour
             enemySprite.flipX = false;
     }
 
-    private void StopAndLookAround()
+    public virtual void StopAndLookAround()
     {
         // Stop moving and look around for a while
         // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), Time.deltaTime);
@@ -112,7 +114,7 @@ public class AIController : MonoBehaviour
         }
     }
 
-    private void ChasePlayer()
+    public virtual void ChasePlayer()
     {
         // Move towards the last known position of the player
         Vector2 direction = (lastKnownPlayerPosition - transform.position).normalized;
@@ -138,7 +140,7 @@ public class AIController : MonoBehaviour
         }
     }
 
-    private void AttackPlayer()
+    public virtual void AttackPlayer()
     {
         // Keep looking at the player while attacking
         transform.LookAt(lastKnownPlayerPosition);
@@ -170,7 +172,7 @@ public class AIController : MonoBehaviour
         }
     }
 
-    private bool CanSeePlayer()
+    public virtual bool CanSeePlayer()
     {
         // Check if player is within field of view angle and range
         Collider[] playersInFOV = Physics.OverlapSphere(transform.position, chaseRange, playerLayer);
