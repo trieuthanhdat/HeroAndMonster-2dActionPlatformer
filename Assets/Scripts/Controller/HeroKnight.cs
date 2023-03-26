@@ -68,7 +68,10 @@ public class HeroKnight : MonoBehaviour {
         CheckGrounded();
         HandleInputAndMovement();
     }
-
+    public Vector2 GetLastPosition()
+    {
+        return transform.position;
+    }
     public void Timer()
     {
         // Increase timer that controls attack combo

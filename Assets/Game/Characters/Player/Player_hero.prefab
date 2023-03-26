@@ -90,7 +90,6 @@ GameObject:
   - component: {fileID: 2359919396279463573}
   - component: {fileID: 6691145538416269706}
   - component: {fileID: 6691145538416269717}
-  - component: {fileID: 6691145538416269716}
   - component: {fileID: 6691145538416269719}
   - component: {fileID: 7993797259964665368}
   m_Layer: 7
@@ -136,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 4
-  m_jumpForce: 7.5
+  m_jumpForce: 8
   m_rollForce: 8
   m_noBlood: 0
   m_slideDust: {fileID: 1038168246061390451, guid: 8b8c8cc6774fb074cb9139cc631b108e,
@@ -304,24 +303,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &6691145538416269716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 799921789731657632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8656757f309a3e47ba3e30e65395308, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  respawnLocation: {fileID: 0}
-  respawnDelay: 3
-  fadeTime: 0.2
-  healthRegenPercentage: 50
-  manaRegenPercnetage: 40
-  enemyHealthRegenPercentage: 15
 --- !u!114 &6691145538416269719
 MonoBehaviour:
   m_ObjectHideFlags: 0
