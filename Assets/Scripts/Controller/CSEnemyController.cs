@@ -18,6 +18,7 @@ public class CSEnemyController : IAIController
     [SerializeField] float attackRate = 5f;
     [SerializeField] float attackDamage = 7f;
     [SerializeField] LayerMask playerLayer;
+    [SerializeField] Sensor_AttackPoint sensorAttackPoints;
 
     private int currentPatrolPointIndex = 0;
     private bool chasingPlayer = false;
@@ -35,7 +36,9 @@ public class CSEnemyController : IAIController
     private float delayToIlde = 0;
     private bool hasJustMoveAway = false;
     private bool doOnce = false;
+    private int faceDirection = 1;
 
+    
 
     public override void Start()
     {
@@ -46,12 +49,13 @@ public class CSEnemyController : IAIController
         groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_HeroKnight>();
         enemySprite = GetComponent<SpriteRenderer>();
         health = GetComponent<Health>();
-        animator = GetComponent<Animator>();
+
     }
  
     public override void Update()
     {
         CheckGrounded();
+        
     }
     public override void FixedUpdate()
     {
@@ -76,7 +80,7 @@ public class CSEnemyController : IAIController
             Patrol();
         }
         HandleStates();
-         
+        Flip();
     }
 
     
@@ -128,10 +132,11 @@ public class CSEnemyController : IAIController
 
     public override void Flip()
     {
-        Vector2 direction = targetPosition - (Vector2)transform.position;
-        if (direction.x < 0)
-            enemySprite.flipX = true;
-        
+        if(CanSeePlayer())
+            targetPosition = playerTransform.position;
+
+        GetComponent<SpriteRenderer>().flipX = targetPosition.x > transform.position.x;
+        sensorAttackPoints.transform.localScale = new Vector2(targetPosition.x > transform.position.x? -1 : 1, sensorAttackPoints.transform.localScale.y);
     }
 
     public override void StopAndLookAround()
@@ -169,7 +174,6 @@ public class CSEnemyController : IAIController
         // Check if the AI can see the player
         if (CanSeePlayer())
         {
-            
             // Update the last known player position
             lastKnownPlayerPosition = playerTransform.position;
 
@@ -334,7 +338,8 @@ public class CSEnemyController : IAIController
     ///----ANIMATION EVENTS HANDLER----///
     public override void HandleHit()
     {
-        playerTransform.GetComponent<Health>().TakeDamage(playerTransform.gameObject,attackDamage, playerTransform.GetComponent<HeroKnight>().HeroAnimator);
+        if(playerTarget)
+            playerTarget.TakeDamage(playerTransform.gameObject,attackDamage, playerTransform.GetComponent<HeroKnight>().HeroAnimator);
     }
 
 }

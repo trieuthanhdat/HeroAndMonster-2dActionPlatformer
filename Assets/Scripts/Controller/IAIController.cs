@@ -14,11 +14,13 @@ public class IAIController : MonoBehaviour
         PATROL,
         CHASE
     }
-    [HideInInspector]
     public Animator animator;
     [HideInInspector]
     public Rigidbody2D rb2D; // Add this line to store a reference to the Rigidbody2D component
     
+    [HideInInspector]
+    public Health playerTarget;
+
     public virtual void FixedUpdate()
     {
         

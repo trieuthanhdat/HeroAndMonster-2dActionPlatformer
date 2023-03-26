@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6949118675578168706}
   - component: {fileID: 2646308152058420403}
+  - component: {fileID: 5486137135607530250}
+  - component: {fileID: 4779391473178120438}
   m_Layer: 3
   m_Name: Ground 1
   m_TagString: Untagged
@@ -24,12 +26,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 546513614100399740}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.92, y: -3.48, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5.25, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3075082205735005979}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -85,34 +86,56 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &4065899247208544744
-GameObject:
+--- !u!114 &5486137135607530250
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3075082205735005979}
-  m_Layer: 3
-  m_Name: Collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3075082205735005979
-Transform:
+  m_GameObject: {fileID: 546513614100399740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eda02d952b9940479c50d1a4e6a6a3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefabs:
+  - {fileID: 7030762273809194426, guid: 398c489e38780ae4ebf502943fdd9c8d, type: 3}
+  - {fileID: 7030762273809194426, guid: 398c489e38780ae4ebf502943fdd9c8d, type: 3}
+  - {fileID: 7030762273809194426, guid: 398c489e38780ae4ebf502943fdd9c8d, type: 3}
+  - {fileID: 7030762273809194426, guid: 398c489e38780ae4ebf502943fdd9c8d, type: 3}
+  spawnDelay: 1
+  spawnRadius: 1
+  spawnFrequency: 5
+  firstDelaySpawnTime: 1
+  limitSpawnTimeRange: 6
+  spawnedEnemies: []
+--- !u!60 &4779391473178120438
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4065899247208544744}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6949118675578168706}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 546513614100399740}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 7.87, y: 3.64}
+    newSize: {x: 7.87, y: 3.64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.0016926462, y: 0.5536685}
+      - {x: -3.5304697, y: 0.36190698}
+      - {x: -3.3634946, y: -1.0677196}
+      - {x: 0.58778536, y: -0.80901694}
+      - {x: 3.5128322, y: 1.0007694}

@@ -263,7 +263,7 @@ public class HeroKnight : MonoBehaviour {
     {
         foreach (Health enemyHealth in enemies)
         {
-            if (enemyHealth)
+            if (enemyHealth && !enemyHealth.IsDead())
             {
                 enemyHealth.TakeDamage(gameObject, damage, enemyHealth.gameObject.GetComponent<IAIController>().animator);
                 enemyHealth.GetComponent<Rigidbody2D>().AddForce(new Vector2(m_facingDirection * hitForce , 0), ForceMode2D.Impulse);

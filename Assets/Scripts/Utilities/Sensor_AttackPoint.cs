@@ -6,19 +6,30 @@ using UnityEngine;
 public class Sensor_AttackPoint : MonoBehaviour
 {
     public HeroKnight heroKnight;
+    public IAIController enemy;
     public int forPointAttack = -1;
+    public string targetTag = "Enemy";
 
     private bool canHit = false;
     
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag(targetTag))
         {
             Health enemyHealth = other.GetComponent<Health>();
-            if (enemyHealth && !heroKnight.enemies.Contains(enemyHealth))
+            if(heroKnight && !enemy)
             {
-                heroKnight.enemies.Add(enemyHealth);
+                if (enemyHealth && !heroKnight.enemies.Contains(enemyHealth))
+                {
+                    heroKnight.enemies.Add(enemyHealth);
+                    canHit = true;
+                }
+            }
+            else if(!heroKnight && enemy)
+            {
+                if(enemyHealth)
+                    enemy.playerTarget = enemyHealth;
                 canHit = true;
             }
         }
@@ -26,14 +37,23 @@ public class Sensor_AttackPoint : MonoBehaviour
     
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag(targetTag))
         {
             Health enemyHealth = other.GetComponent<Health>();
-            if (enemyHealth)
+            if(heroKnight && !enemy)
             {
-                heroKnight.enemies.Remove(enemyHealth);
+                if (enemyHealth)
+                {
+                    heroKnight.enemies.Remove(enemyHealth);
+                    canHit = heroKnight.enemies.Count > 0;
+                }
             }
-            canHit = heroKnight.enemies.Count > 0;
+            else if(!heroKnight && enemy)
+            {
+                if (enemyHealth)
+                    enemy.playerTarget = null;
+                canHit = false;
+            }
         }
     }
    

@@ -183,7 +183,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7030762274158552573
 Transform:
   m_ObjectHideFlags: 0
@@ -219,7 +219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7030762274252552187
 Transform:
   m_ObjectHideFlags: 0
@@ -275,7 +275,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroKnight: {fileID: 9043920546160527475, guid: a4b4a6d32bcb19248a754d6602ffc7e4,
     type: 3}
+  enemy: {fileID: 0}
   forPointAttack: -1
+  targetTag: Enemy
 --- !u!1 &7030762274333773092
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7030762274911205928
 Transform:
   m_ObjectHideFlags: 0
@@ -471,7 +473,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroKnight: {fileID: 9043920546160527475, guid: a4b4a6d32bcb19248a754d6602ffc7e4,
     type: 3}
+  enemy: {fileID: 0}
   forPointAttack: -1
+  targetTag: Enemy
 --- !u!1 &7030762274934150325
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,7 +490,6 @@ GameObject:
   - component: {fileID: 7030762274934150333}
   - component: {fileID: 7030762274934150335}
   - component: {fileID: 7030762274934150331}
-  - component: {fileID: 7030762274934150328}
   - component: {fileID: 7030762274934150329}
   - component: {fileID: 7030762274934150306}
   - component: {fileID: 8573684617005031416}
@@ -504,7 +507,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7030762274934150325}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -808.46, y: -56.82457, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -607,7 +610,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0.5
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -652,24 +655,6 @@ MonoBehaviour:
   OnDie:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7030762274934150328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7030762274934150325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8656757f309a3e47ba3e30e65395308, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  respawnLocation: {fileID: 0}
-  respawnDelay: 3
-  fadeTime: 0.2
-  healthRegenPercentage: 50
-  manaRegenPercnetage: 40
-  enemyHealthRegenPercentage: 15
 --- !u!114 &7030762274934150329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -710,21 +695,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbcfc5de13b46a742bf7342b81b43523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 7030762274934150307}
+  rb2D: {fileID: 0}
+  playerTarget: {fileID: 0}
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   moveSpeed: 2
-  stopTime: 2
+  stopTime: 3
   lookAroundTime: 3
   fieldOfViewAngle: 90
-  chaseRange: 10
-  attackRange: 2
-  attackRate: 1
+  chaseRange: 6
+  attackRange: 1
+  attackRate: 2
   attackDamage: 7
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
+  sensorAttackPoints: {fileID: 7030762275502951760}
 --- !u!1 &7030762275384798891
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,8 +801,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7030762275502951762}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.751, y: 0.562, z: 0}
-  m_LocalScale: {x: 2.1135678, y: 0.56626165, z: 1}
+  m_LocalPosition: {x: 0.19547, y: 0.671, z: 0}
+  m_LocalScale: {x: 1.4375, y: 1.3125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7030762274158552573}
@@ -832,7 +821,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.3014283, y: 0}
+  m_Offset: {x: -0.42393157, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -843,7 +832,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.39714342, y: 1}
+  m_Size: {x: 0.64215, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &7030762275502951760
 MonoBehaviour:
@@ -857,9 +846,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 623c8dcb67d836a4795628e6c19cf97a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heroKnight: {fileID: 9043920546160527475, guid: a4b4a6d32bcb19248a754d6602ffc7e4,
-    type: 3}
-  forPointAttack: -1
+  heroKnight: {fileID: 0}
+  enemy: {fileID: 8573684617005031416}
+  forPointAttack: 1
+  targetTag: Player
 --- !u!1001 &7030762274990023008
 PrefabInstance:
   m_ObjectHideFlags: 0

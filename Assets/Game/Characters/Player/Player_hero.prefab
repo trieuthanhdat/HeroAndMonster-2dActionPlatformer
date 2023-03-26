@@ -62,7 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_speed: 4
   m_jumpForce: 7.5
-  m_rollForce: 5
+  m_rollForce: 8
   m_noBlood: 0
   m_slideDust: {fileID: 1038168246061390451, guid: 8b8c8cc6774fb074cb9139cc631b108e,
     type: 3}
@@ -345,8 +345,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844877294081694943}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.4131, y: 0.437, z: 0}
-  m_LocalScale: {x: 1.790258, y: 0.9383133, z: 1}
+  m_LocalPosition: {x: 1.4131, y: 0.61, z: 0}
+  m_LocalScale: {x: 1.790258, y: 1.1728916, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4485214729022380693}
@@ -365,7 +365,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.3014283, y: 0}
+  m_Offset: {x: -0.34653586, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -376,7 +376,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.39714342, y: 1}
+  m_Size: {x: 0.48735857, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &234453849580594771
 MonoBehaviour:
@@ -391,7 +391,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroKnight: {fileID: 2403176983404364854}
+  enemy: {fileID: 0}
   forPointAttack: 2
+  targetTag: Enemy
 --- !u!1 &2435687844912549927
 GameObject:
   m_ObjectHideFlags: 0
@@ -662,8 +664,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5445417161541025622}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.1173, y: 0.544, z: 0}
-  m_LocalScale: {x: 3.46736, y: 0.7495336, z: 1}
+  m_LocalPosition: {x: 2.1173, y: 0.57327, z: 0}
+  m_LocalScale: {x: 3.46736, y: 1.0212395, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4485214729022380693}
@@ -682,7 +684,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.3014283, y: 0}
+  m_Offset: {x: -0.3014283, y: -0.10773949}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -693,7 +695,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.39714342, y: 1}
+  m_Size: {x: 0.39714342, y: 1.2154787}
   m_EdgeRadius: 0
 --- !u!114 &7084627838074860995
 MonoBehaviour:
@@ -708,7 +710,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroKnight: {fileID: 2403176983404364854}
+  enemy: {fileID: 0}
   forPointAttack: 3
+  targetTag: Enemy
 --- !u!1 &6691145536698623948
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,7 +759,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.3014283, y: 0}
+  m_Offset: {x: -0.4860451, y: 0.34346426}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -766,7 +770,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.39714342, y: 1}
+  m_Size: {x: 0.76637703, y: 2.0604255}
   m_EdgeRadius: 0
 --- !u!114 &6691145536698623950
 MonoBehaviour:
@@ -781,7 +785,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroKnight: {fileID: 2403176983404364854}
+  enemy: {fileID: 0}
   forPointAttack: 4
+  targetTag: Enemy
 --- !u!1 &6691145537469421348
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,8 +814,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6691145537469421348}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.751, y: 0.562, z: 0}
-  m_LocalScale: {x: 2.1135678, y: 0.56626165, z: 1}
+  m_LocalPosition: {x: 1.77, y: 0.562, z: 0}
+  m_LocalScale: {x: 2.4570227, y: 0.56626165, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4485214729022380693}
@@ -828,7 +834,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.3014283, y: 0}
+  m_Offset: {x: -0.3625604, y: -0.16162413}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -839,7 +845,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.39714342, y: 1}
+  m_Size: {x: 0.51940763, y: 1.3232483}
   m_EdgeRadius: 0
 --- !u!114 &6691145537469421345
 MonoBehaviour:
@@ -854,7 +860,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroKnight: {fileID: 2403176983404364854}
+  enemy: {fileID: 0}
   forPointAttack: 1
+  targetTag: Enemy
 --- !u!1 &6725756864449991219
 GameObject:
   m_ObjectHideFlags: 0

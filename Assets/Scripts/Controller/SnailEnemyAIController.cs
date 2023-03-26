@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using RPG.Resources;
@@ -5,40 +6,108 @@ using UnityEngine;
 
 public class SnailEnemyAIController : IAIController
 {
+    
+    [SerializeField] Rigidbody2D projectile;         // the prefab of the projectile
+    [SerializeField] Transform firePoint;             // the position where the projectile will be fired from
+    [SerializeField] float forceMultiplier;           // the force that will be applied to the projectile
+    [SerializeField] float shootCooldown = 2.0f;      // the time delay between shots
+    [SerializeField] float attackRange = 6f;
+    [SerializeField] float activeDistance = 5;
+    
+    private Transform playerTransform;       // the player's transform
     private EnemyStates currentState = EnemyStates.IDLE;
     private bool isFacingRight = true;
+    private bool grounded = false;
     private Transform player;
     public float chaseTimeInterval = 2f;
     private float timeSinceLastChase = 0f;
+    private float delayToIlde = 0;
+    private Sensor_HeroKnight   groundSensor;
     private Rigidbody2D rb;
+    private bool canAppear = false;
+    private bool canDisappear = false;
+    private bool firstAppeared = false;
+    private Health health ;
 
+    ///---ANIMATION EVENTS---///
+    void FireProjectile()
+    {
+        // calculate the direction and force of the launch
+        Vector2 launchDirection = playerTransform.position - firePoint.position;
+        launchDirection.Normalize();
+        float launchForce = Vector2.Distance(playerTransform.position, firePoint.position) * forceMultiplier;
+
+        // instantiate the projectile at the fire point position
+        Rigidbody2D projectileInstance = Instantiate(projectile, firePoint.position, firePoint.rotation) as Rigidbody2D;
+
+        // apply the force to the projectile
+        projectileInstance.AddForce(launchDirection * launchForce, ForceMode2D.Impulse);
+        health = GetComponent<Health>();
+    }
+
+    public void StartShooting()
+    {
+        FireProjectile();
+    }
+    public void SetFirstAppear()
+    {
+        firstAppeared = true;
+    }
+    ///----------------------///
+
+    private void OnEnable()
+    {
+        currentState = EnemyStates.IDLE;
+        animator.SetTrigger("Appear");
+    }
     public override void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        canAppear = true;
+        groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_HeroKnight>();
+        canDisappear = false;
     }
 
     public override void FixedUpdate()
     {
+
+        if(firstAppeared == false) return;
         // Check if we should chase the player after waiting for a bit
         if (currentState == EnemyStates.CHASE && Time.time - timeSinceLastChase > chaseTimeInterval)
         {
             currentState = EnemyStates.IDLE;
-            animator.SetBool("isRunning", false);
-            animator.SetBool("isAttacking", false);
         }
     }
+    public void CheckGrounded()
+    {
+        //Check if character just landed on the ground
+        if (!grounded && groundSensor.State())
+        {
+            grounded = true;
+            animator.SetBool("Grounded", grounded);
+        }
 
+        //Check if character just started falling
+        if (grounded && !groundSensor.State())
+        {
+            grounded = false;
+            animator.SetBool("Grounded", grounded);
+        }
+
+    }
     public override void Update()
     {
         // Update the current state based on the enemy's behavior
+        if(firstAppeared == false) return;
+        CheckGrounded();
         switch (currentState)
         {
             case EnemyStates.IDLE:
                 if (CanSeePlayer())
                 {
-                    currentState = EnemyStates.CHASE;
+                    currentState = EnemyStates.ATTACK;
                     timeSinceLastChase = Time.time;
-                    animator.SetBool("isRunning", true);
                 }
                 else
                 {
@@ -47,16 +116,6 @@ public class SnailEnemyAIController : IAIController
                 break;
 
             case EnemyStates.CHASE:
-                if (CanSeePlayer())
-                {
-                    ChasePlayer();
-                    timeSinceLastChase = Time.time;
-                }
-                else
-                {
-                    currentState = EnemyStates.IDLE;
-                    animator.SetBool("isRunning", false);
-                }
                 break;
 
             case EnemyStates.ATTACK:
@@ -66,8 +125,7 @@ public class SnailEnemyAIController : IAIController
                 }
                 else
                 {
-                    currentState = EnemyStates.CHASE;
-                    animator.SetBool("isAttacking", false);
+                    currentState = EnemyStates.IDLE;
                 }
                 break;
 
@@ -83,6 +141,11 @@ public class SnailEnemyAIController : IAIController
         }
     }
 
+    public override void Patrol()
+    {
+       
+
+    }
     public override void ChasePlayer()
     {
         Vector2 direction = (player.position - transform.position).normalized;
@@ -98,7 +161,7 @@ public class SnailEnemyAIController : IAIController
         }
 
         // Attack the player if they're close enough
-        if (Vector2.Distance(transform.position, player.position) < 1.5f)
+        if (Vector2.Distance(transform.position, player.position) < attackRange)
         {
             currentState = EnemyStates.ATTACK;
             animator.SetBool("isRunning", false);
@@ -112,7 +175,7 @@ public class SnailEnemyAIController : IAIController
     {
         // Flip the enemy sprite horizontally
         isFacingRight = !isFacingRight;
-        transform.Rotate(0f, 180f, 0f);
+        GetComponent<SpriteRenderer>().flipX = !isFacingRight;
     }
 
     public void SetPlayer(Transform player)
@@ -120,61 +183,8 @@ public class SnailEnemyAIController : IAIController
         this.player = player;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            currentState = EnemyStates.ATTACK;
-            animator.SetBool("isRunning", false);
-            animator.SetBool("isAttacking", true);
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            currentState = EnemyStates.CHASE;
-            animator.SetBool("isAttacking", false);
-            animator.SetBool("isRunning", true);
-        }
-    }
-
-    public override void HandleStates()
-    {
-    // Handle the different states of the enemy
-        switch (currentState)
-        {
-            case EnemyStates.IDLE:
-                HandleIdle();
-                break;
-            case EnemyStates.RUN:
-                break;
-            case EnemyStates.ATTACK:
-                HandleAttack();
-                break;
-            case EnemyStates.PATROL:
-                Patrol();
-                break;
-            case EnemyStates.CHASE:
-                HandleChase();
-                break;
-            default:
-                break;
-        }
-    }
-
     private void HandleChase()
     {
-        if (CanSeePlayer())
-        {
-            ChasePlayer();
-        }
-        else
-        {
-            currentState = EnemyStates.IDLE;
-            animator.SetBool("isRunning", false);
-        }
     }
 
     public override void HandleIdle()
@@ -195,7 +205,7 @@ public class SnailEnemyAIController : IAIController
     // TODO: Implement enemy attack logic here
     }
 
-    public  bool CanSeePlayer()
+    public override  bool CanSeePlayer()
     {
         if (player == null)
         {
@@ -203,10 +213,8 @@ public class SnailEnemyAIController : IAIController
         }
         // Calculate the direction from the enemy to the player
         Vector3 direction = player.position - transform.position;
-
         // Cast a ray in the direction of the player
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Mathf.Infinity, LayerMask.GetMask("Player"));
-
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, activeDistance, LayerMask.GetMask("Player"));
         // If the ray hit the player, return true
         if (hit.collider != null && hit.collider.CompareTag("Player"))
         {
@@ -214,6 +222,12 @@ public class SnailEnemyAIController : IAIController
         }
 
         return false;
+    }
+    private void OnDrawGizmos()
+    {
+        // Draw a line showing the direction of the raycast
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + (player.position - transform.position).normalized * activeDistance);
     }
 
 
