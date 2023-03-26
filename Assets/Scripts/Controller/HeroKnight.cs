@@ -68,6 +68,10 @@ public class HeroKnight : MonoBehaviour {
         CheckGrounded();
         HandleInputAndMovement();
     }
+    public void Kill()
+    {
+         Destroy(gameObject);
+    }
     public Vector2 GetLastPosition()
     {
         return transform.position;

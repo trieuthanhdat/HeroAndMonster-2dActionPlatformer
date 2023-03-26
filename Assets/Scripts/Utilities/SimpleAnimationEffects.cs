@@ -17,13 +17,17 @@ public class SimpleAnimationEffects : MonoBehaviour
     public AnimationEffectType type;
     public bool PlayOnAwake = false;
     private Animator _animator;
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+   
     private void Start()
     {
         _animator = GetComponent<Animator>();
         if(PlayOnAwake)
            HandleEffect(type);
     }
-
+    
     public void HandleEffect(AnimationEffectType type)
     {
         if(!_animator) return;

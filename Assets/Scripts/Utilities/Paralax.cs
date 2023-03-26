@@ -14,15 +14,17 @@ public class Paralax : MonoBehaviour
     void Start()
     {
         cam = GameObject.Find("Main Camera");
-
-        length = GetComponent<SpriteRenderer>().bounds.size.x;
+        if(GetComponent<SpriteRenderer>())
+            length = GetComponent<SpriteRenderer>().bounds.size.x;
+        else 
+            length = 0;
         xPosition = transform.position.x;
 
 
     }
 
     
-    void Update()
+    void LateUpdate()
     {
         float distanceMoved = cam.transform.position.x * (1 - parallaxEffect);
         float distanceToMove = cam.transform.position.x * parallaxEffect;
