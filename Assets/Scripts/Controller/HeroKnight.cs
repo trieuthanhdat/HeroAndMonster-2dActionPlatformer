@@ -17,7 +17,8 @@ public class HeroKnight : MonoBehaviour {
 
     [SerializeField] float m_basicDamagePoint = 10;
     [SerializeField] float m_specialDamagePoint = 20;
-
+    [SerializeField] float skillCoolDownTime = 4f;
+    [SerializeField] float dashCoolDownTime = 2f;
     private Animator            m_animator;
     private Rigidbody2D         m_body2d;
     private Sensor_HeroKnight   m_groundSensor;
@@ -35,6 +36,8 @@ public class HeroKnight : MonoBehaviour {
     private float               m_delayToIdle = 0.0f;
     private float               m_dashDuration = 8.0f / 14.0f;
     private float               m_dashCurrentTime;
+    private float               m_dashCoolDownTimeRemaining = 0;
+    private float               m_skillCoolDownTimeRemaining = 0;
     private Health              m_health = null;
     private List<Sensor_AttackPoint> m_sensorAttackPoints = new List<Sensor_AttackPoint>();
     [HideInInspector]
@@ -79,7 +82,11 @@ public class HeroKnight : MonoBehaviour {
         if(m_dashCurrentTime > m_dashDuration)
             m_dashing = false;
 
+        m_dashCoolDownTimeRemaining -= Time.deltaTime;
+        m_skillCoolDownTimeRemaining -= Time.deltaTime;
     }
+
+
     public void CheckGrounded()
     {
         //Check if character just landed on the ground
@@ -109,6 +116,7 @@ public class HeroKnight : MonoBehaviour {
         m_animator.SetFloat("AirSpeedY", m_body2d.velocity.y);
 
         // -- Handle Animations --
+        Debug.Log("m_dashing "+m_dashing +" m_isUsingSpecial "+m_isUsingSpecial +" m_grounded "+m_grounded);
         //Attack
         if(Input.GetButtonDown(PC2D.Input.ATTACK) && m_timeSinceAttack > 0.25f && !m_dashing && !m_isUsingSpecial)
         {
@@ -160,8 +168,13 @@ public class HeroKnight : MonoBehaviour {
     }
 
 
+
     ///---ANIMETION HANDLER---//
-    
+    ///SOUND EFF
+    public void PlaySoundEFFWithName(string name)
+    {
+        MonoAudioManager.instance.PlaySound(name);
+    }
     public void HandleHurt(float damage)
     {
         m_animator.SetTrigger("Hurt");
@@ -212,16 +225,44 @@ public class HeroKnight : MonoBehaviour {
     }
     private void HandleSpecial()
     {
+        if(m_skillCoolDownTimeRemaining > 0)
+        {
+            return;
+        }
         m_isUsingSpecial = true;
         m_animator.SetTrigger("Special");
         m_body2d.velocity = new Vector2(m_facingDirection, m_body2d.velocity.y);
+        m_skillCoolDownTimeRemaining = skillCoolDownTime ;
+    }
+    public float CalculateSkillCoolDownTimeFaction()
+    {
+        float temp = m_skillCoolDownTimeRemaining;
+        if(temp <= 0)
+            temp = 0;
+        
+        return temp/skillCoolDownTime;
+    }
+    public float CalculateDashCoolDownTimeFaction()
+    {
+        float temp = m_dashCoolDownTimeRemaining;
+        if(temp <= 0)
+            temp = 0;
+        
+        return temp/dashCoolDownTime;
     }
     private void HandleDash()
     {
+        if(m_dashCoolDownTimeRemaining > 0)
+        {
+            m_dashing = false;
+            return;
+        }
+
         m_dashing = true;
         m_animator.SetTrigger("Dash");
         m_dashCurrentTime = 0;
         m_body2d.velocity = new Vector2(m_facingDirection * m_rollForce, m_body2d.velocity.y);
+        m_dashCoolDownTimeRemaining = dashCoolDownTime;
     }
     private void Flip(float inputX)
     {

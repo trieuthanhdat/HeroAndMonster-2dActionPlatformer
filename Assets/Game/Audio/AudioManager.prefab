@@ -1,0 +1,487 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3743233023957140778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3743233023957140776}
+  - component: {fileID: 3743233023957140777}
+  - component: {fileID: 5762307235389913404}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3743233023957140776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3743233023957140778}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 406.55984, y: 248.26965, z: -0.77177215}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &3743233023957140777
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3743233023957140778}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5762307235389913404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3743233023957140778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ddd3daf711cfa441ba5e7cb04a58249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPlayerPrefabs: {fileID: 4471421942589549941, guid: 2d481d7c4935fa040928b44aa972db95,
+    type: 3}
+  sounds:
+  - name: ButtonConfirm
+    clip: {fileID: 8300000, guid: 620f29d8a6d14d54ba7973b99b279f7a, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 0
+    fadeOutTimer: 0
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: ButtonDecline
+    clip: {fileID: 8300000, guid: 26a653868ee47654fbc4145b9f523d0e, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 0
+    fadeOutTimer: 0
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: Pause
+    clip: {fileID: 8300000, guid: 11ccfb6ed91faaa4b923b72aaeadd25d, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 0
+    fadeOutTimer: 0
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: UnPause
+    clip: {fileID: 8300000, guid: 69bbe206802c4af4ebf56252196eee09, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 0
+    fadeOutTimer: 0
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: GameplayBG
+    clip: {fileID: 8300000, guid: d08908ace4ed44747bd8948f779d2252, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: LoadingBG
+    clip: {fileID: 8300000, guid: 8e391c12e1062d542873e247bbb687a5, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: SplashCreenBG
+    clip: {fileID: 8300000, guid: 3646ce852ecd0444daed272caa53d64a, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: GameOver
+    clip: {fileID: 8300000, guid: 3a110f7f8837a09489f953615f9773ca, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: GameWon
+    clip: {fileID: 8300000, guid: c3c4e333863710747885e43201dafb87, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: BossSkill1
+    clip: {fileID: 8300000, guid: 27f21e60757d6e944a177e69fcc02d37, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: BossUltimate
+    clip: {fileID: 8300000, guid: 47d04043b60fc134190cc4a4f604e643, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: BossHPG30
+    clip: {fileID: 8300000, guid: 5b58fd51fb0006045b7e88a84b19cb78, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: BossHPL30
+    clip: {fileID: 8300000, guid: f8d767a357042134c95d3f013d979a34, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: BossDie
+    clip: {fileID: 8300000, guid: 725173a3fb281a744ae328c2dcb58c2f, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: BossCreepDie
+    clip: {fileID: 8300000, guid: 5bb6cef8b8676ea4db6c5ebe8070d58d, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 8300000, guid: da96faa2324965f46b33df08332f3b9c, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: Land
+    clip: {fileID: 8300000, guid: da0a295ab2c8836428409f9d9f8f17d4, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: Attack3
+    clip: {fileID: 8300000, guid: 09f21110d4679794bb2bddc9f6be2182, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: DieKnight
+    clip: {fileID: 8300000, guid: a97968766a63c2145b60d7935bd47220, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: Run
+    clip: {fileID: 8300000, guid: e16b94c4610afdd4da608a0b795ca131, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: Run2
+    clip: {fileID: 8300000, guid: e89eacfc50144d848a6925feb4fe03dd, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: Run3
+    clip: {fileID: 8300000, guid: 657f09ee1151d074bbfa846a85ccc1fe, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: Run4
+    clip: {fileID: 8300000, guid: 11cb2d0d8fff863408c7c8f1df58264e, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: Run5
+    clip: {fileID: 8300000, guid: 972f0becf2583234aba4b1a75ab5c177, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: PlayerDash
+    clip: {fileID: 8300000, guid: f4c275d24c223fb459f7158dad430c3f, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: PlayerDie
+    clip: {fileID: 8300000, guid: 01a4f371effea4941a866355b5e8ad38, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: PlayerJump
+    clip: {fileID: 8300000, guid: 99aa37b81d6be22449d32f925696bff6, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: PlayerSkill
+    clip: {fileID: 8300000, guid: 915c211b659ab6d4e8ac50971c6b8a02, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: PlayerAttackHit1
+    clip: {fileID: 8300000, guid: f7623c31bbb4d264e9f17a09615deb11, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: PlayerAttackHit2
+    clip: {fileID: 8300000, guid: c5cf5347a71695043b9cfa74112e7c95, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: PlayerAttackHit3
+    clip: {fileID: 8300000, guid: b6fb3cb3bb6c04842876b15cb23855d1, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}

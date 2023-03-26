@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Runtime.CompilerServices;
-
+using System.Linq;
 [System.Serializable]
 public class Sound
 {
@@ -53,7 +52,6 @@ public class MonoAudioManager : MonoSingleton<MonoAudioManager>
             s.audioSrc.playOnAwake = s.playOnAwake;
             s.audioSrc.volume = s.volume;
             s.audioSrc.pitch = s.pitch;
-             OptionsManager.instance.AddAudioSFXs(s.player);
         }
        
     }
@@ -84,8 +82,23 @@ public class MonoAudioManager : MonoSingleton<MonoAudioManager>
         if(modifiedFadeoutTime > -1)
             s.fadeOutTimer = modifiedFadeoutTime;
         s.player.StopSound();
+    }   
+    public void DisableAllBGSound()
+    {
+        foreach(Sound s in sounds)
+        {
+            if(s.name.Contains("BG"))
+                s.audioSrc.Pause();
+        }
     }
-
+    public void EnableAllBGSound()
+    {
+            foreach(Sound s in sounds)
+            {
+                if(s.name.Contains("BG"))
+                    s.audioSrc.Play();
+            }
+    }
 
 }
 

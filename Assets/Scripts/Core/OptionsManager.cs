@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OptionsManager : MonoSingleton<OptionsManager>
+public class OptionsManager : MonoBehaviour
 {
 
     public AudioSource bgmAudioSource;
     public List<MonoAudioPlayer> sfxAudioSource;
     public Toggle bgmToggle;
     public Toggle sfxToggle;
-    public Slider bgmSlider;
-    public Slider sfxSlider;
+    // public Slider bgmSlider;
+    // public Slider sfxSlider;
 
     private bool isBgmOn;
     private bool isSfxOn;
@@ -26,41 +26,40 @@ public class OptionsManager : MonoSingleton<OptionsManager>
         bgmToggle.isOn = true;
         sfxToggle.isOn = true;
 
-        bgmSlider.value = bgmAudioSource.volume;
+        // bgmSlider.value = bgmAudioSource.volume;
         
 
-        bgmSlider.onValueChanged.AddListener(SetBgmVolume);
-        sfxSlider.onValueChanged.AddListener(SetSfxVolume);
+        // bgmSlider.onValueChanged.AddListener(SetBgmVolume);
+        // sfxSlider.onValueChanged.AddListener(SetSfxVolume);
     }
-    public void AddAudioSFXs(MonoAudioPlayer sound)
-    {
-        sfxAudioSource.Add(sound);
-    }
+    
     public void ToggleBgm()
     {
         if (isBgmOn)
         {
             bgmAudioSource.Pause();
+            MonoAudioManager.instance.DisableAllBGSound();
         }
         else
         {
             bgmAudioSource.Play();
+            MonoAudioManager.instance.EnableAllBGSound();
         }
         isBgmOn = !isBgmOn;
     }
    
-    public void ToggleSfx()
-    {
-        if (isBgmOn)
-        {
-            SetSfxVolume(0);
-        }
-        else
-        {
-            SetSfxVolume(sfxSlider.value);
-        }
-        isSfxOn = !isSfxOn;
-    }
+    // public void ToggleSfx()
+    // {
+    //     if (isBgmOn)
+    //     {
+    //         SetSfxVolume(0);
+    //     }
+    //     else
+    //     {
+    //         SetSfxVolume(sfxSlider.value);
+    //     }
+    //     isSfxOn = !isSfxOn;
+    // }
 
     public bool IsBgmOn()
     {

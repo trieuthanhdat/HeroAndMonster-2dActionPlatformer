@@ -23,7 +23,10 @@ public class IAIController : MonoBehaviour
     
     [HideInInspector]
     public Health playerTarget;
-
+    public void PlaySoundEFFWithName(string name)
+    {
+        MonoAudioManager.instance.PlaySound(name);
+    }
     public virtual void OnEnable()
     {
         

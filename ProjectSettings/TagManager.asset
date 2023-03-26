@@ -8,6 +8,7 @@ TagManager:
   - PlayerProjectile
   - Enemy
   - BoundEdge
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -53,4 +54,7 @@ TagManager:
     locked: 0
   - name: Character
     uniqueID: 3897730095
+    locked: 0
+  - name: Projectile
+    uniqueID: 3810118159
     locked: 0

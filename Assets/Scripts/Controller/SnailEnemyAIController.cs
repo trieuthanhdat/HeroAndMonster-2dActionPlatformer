@@ -55,6 +55,12 @@ public class SnailEnemyAIController : IAIController
     }
     public void StartDisappear()
     {
+        currentState = EnemyStates.IDLE;
+        gameObject.SetActive(false);
+
+    }
+    public void StartDie()
+    {
         currentState = EnemyStates.DEATH;
         Destroy(gameObject);
     }
@@ -243,7 +249,7 @@ public class SnailEnemyAIController : IAIController
 
     public override  bool CanSeePlayer()
     {
-        if (playerTransform == null)
+        if (playerTransform == null && playerHealth.IsDead())
         {
             return false;
         }

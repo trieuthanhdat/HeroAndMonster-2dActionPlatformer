@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using RPG.Resources;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,9 +11,7 @@ public class GameStateManager : MonoSingleton<GameStateManager>
     public GameObject gameOverPanel;
     public GameObject gameWinPanel;
 
-    public Text gameOverText;
-    public Text gameWinText;
-
+    private HeroKnight player;
     private bool isPaused;
     private bool isGameOver;
     private bool isGameWin;
@@ -38,6 +37,8 @@ public class GameStateManager : MonoSingleton<GameStateManager>
         pausePanel.SetActive(false);
         gameOverPanel.SetActive(false);
         gameWinPanel.SetActive(false);
+
+        player = GameObject.FindObjectOfType<HeroKnight>();
     }
 
     void Update()
@@ -53,12 +54,18 @@ public class GameStateManager : MonoSingleton<GameStateManager>
                 ResumeGame();
             }
         }
+        if(player )
+        {
+            if(player.GetComponent<Health>().IsDead())
+                Invoke("GameOver",1);
+        }
+
     }
 
     public void PauseGame()
     {
         isPaused = true;
-        Time.timeScale = 0;
+        Time.timeScale =  0;
         pausePanel.SetActive(true);
     }
 
@@ -73,13 +80,19 @@ public class GameStateManager : MonoSingleton<GameStateManager>
     {
         isGameOver = true;
         gameOverPanel.SetActive(true);
-        gameOverText.text = "Game Over";
     }
 
     public void GameWin()
     {
         isGameWin = true;
         gameWinPanel.SetActive(true);
-        gameWinText.text = "You Win!";
+    }
+    public void Restart()
+    {
+         LoadingScreenManager.instance.LoadScene("Level1");
+    }
+    public void BackToMainMenu()
+    {
+        LoadingScreenManager.instance.LoadScene("MainMenu");
     }
 }

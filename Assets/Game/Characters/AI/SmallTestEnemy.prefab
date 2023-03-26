@@ -333,7 +333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingLevel: 1
-  characterClass: 0
+  characterClass: 2
   progression: {fileID: 11400000, guid: 4029510241dc1a54dae0185879dbd059, type: 2}
   lifeUpEffect: {fileID: 0}
   canUseModifier: 0

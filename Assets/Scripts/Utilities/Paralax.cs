@@ -1,29 +1,37 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Paralax : MonoBehaviour
 {
-    [SerializeField] private Transform[] backgrounds;
-    [SerializeField] private float[] parallaxScales;
-    [SerializeField] private float smoothing = 1f;
+    private GameObject cam;
 
-    private Transform cameraTransform;
-    private Vector3 previousCameraPosition;
+    [SerializeField] private float parallaxEffect;
 
-    private void Start()
+    private float length;
+    private float xPosition;
+
+    void Start()
     {
-        cameraTransform = Camera.main.transform;
-        previousCameraPosition = cameraTransform.position;
+        cam = GameObject.Find("Main Camera");
+
+        length = GetComponent<SpriteRenderer>().bounds.size.x;
+        xPosition = transform.position.x;
+
+
     }
 
-    private void Update()
+    
+    void Update()
     {
-        for (int i = 0; i < backgrounds.Length; i++)
+        float distanceMoved = cam.transform.position.x * (1 - parallaxEffect);
+        float distanceToMove = cam.transform.position.x * parallaxEffect;
+
+        transform.position = new Vector3(xPosition + distanceToMove, transform.position.y);
+
+        if (distanceMoved > xPosition + length)
         {
-            float parallax = (previousCameraPosition.x - cameraTransform.position.x) * parallaxScales[i];
-            float backgroundTargetPositionX = backgrounds[i].position.x + parallax;
-            Vector3 backgroundTargetPosition = new Vector3(backgroundTargetPositionX, backgrounds[i].position.y, backgrounds[i].position.z);
-            backgrounds[i].position = Vector3.Lerp(backgrounds[i].position, backgroundTargetPosition, smoothing * Time.deltaTime);
+            xPosition = xPosition + length;
         }
-        previousCameraPosition = cameraTransform.position;
     }
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3688735924374312484}
   - component: {fileID: 3688735924374312482}
   - component: {fileID: 1169520069}
+  - component: {fileID: -5658107847816882170}
   m_Layer: 0
   m_Name: Projecttile
   m_TagString: Untagged
@@ -136,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4214cec1b37bb245bddaf1607e720e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intrigator: {fileID: 0}
+  attackDamage: 3
 --- !u!50 &1169520069
 Rigidbody2D:
   serializedVersion: 4
@@ -158,3 +159,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-5658107847816882170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3688735924374312483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 512979b5da646d8458d4cd0f46d03d30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToDestroy: 6
