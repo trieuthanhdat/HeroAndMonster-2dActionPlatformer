@@ -109,13 +109,6 @@ public class HeroKnight : MonoBehaviour {
         m_animator.SetFloat("AirSpeedY", m_body2d.velocity.y);
 
         // -- Handle Animations --
-        //Wall Slide
-    //    HandleWallSlide();
-
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            HandleHurt();
-        }
         //Attack
         if(Input.GetButtonDown(PC2D.Input.ATTACK) && m_timeSinceAttack > 0.25f && !m_dashing && !m_isUsingSpecial)
         {
@@ -169,9 +162,10 @@ public class HeroKnight : MonoBehaviour {
 
     ///---ANIMETION HANDLER---//
     
-    public void HandleHurt()
+    public void HandleHurt(float damage)
     {
         m_animator.SetTrigger("Hurt");
+        m_health.TakeDamage(damage);
     }
 
     public void HandleDeath()
@@ -265,7 +259,7 @@ public class HeroKnight : MonoBehaviour {
         {
             if (enemyHealth && !enemyHealth.IsDead())
             {
-                enemyHealth.TakeDamage(gameObject, damage, enemyHealth.gameObject.GetComponent<IAIController>().animator);
+                enemyHealth.TakeDamage( damage,gameObject, enemyHealth.gameObject.GetComponent<IAIController>().animator);
                 enemyHealth.GetComponent<Rigidbody2D>().AddForce(new Vector2(m_facingDirection * hitForce , 0), ForceMode2D.Impulse);
             }
         }

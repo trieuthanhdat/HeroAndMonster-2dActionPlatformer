@@ -12,7 +12,10 @@ public class IAIController : MonoBehaviour
         RUN,
         ATTACK,
         PATROL,
-        CHASE
+        CHASE,
+        APPEAR,
+        DISAPPEAR,
+        DEATH
     }
     public Animator animator;
     [HideInInspector]
@@ -21,6 +24,10 @@ public class IAIController : MonoBehaviour
     [HideInInspector]
     public Health playerTarget;
 
+    public virtual void OnEnable()
+    {
+        
+    }
     public virtual void FixedUpdate()
     {
         
@@ -101,5 +108,13 @@ public class IAIController : MonoBehaviour
     public virtual void HandleStates()
     {
     }
-    public virtual void HandleHit(){}
+    public virtual void HandleHit()
+    {
+    }
+    public virtual void HandleDisappear()
+    {
+    }
+    public virtual void HandleAppear()
+    {
+    }
 }

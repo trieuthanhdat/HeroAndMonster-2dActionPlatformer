@@ -202,7 +202,7 @@ namespace RPG.Combat
             if(currentWeaponConfig.HasProjectile())
                 currentWeaponConfig.LaunchProjectile(rightHandTransform ,leftHandTransform ,target , this.gameObject, damage);
             else
-                target.TakeDamage(this.gameObject, GetComponent<BaseStats>().GetStats(Stats.Stats.damage));
+                target.TakeDamage(GetComponent<BaseStats>().GetStats(Stats.Stats.damage),this.gameObject);
 
         }
 

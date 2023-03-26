@@ -39,18 +39,6 @@ AnimationClip:
       value: {fileID: 21300000, guid: 219a5c3d5909928469a0d4438bd27143, type: 3}
     - time: 0.41666666
       value: {fileID: 21300000, guid: 36ed43b4efaed03468f053f7c4111a97, type: 3}
-    - time: 0.48333332
-      value: {fileID: 21300000, guid: c32ab19c4645c9d42b507d9c7f25c8fe, type: 3}
-    - time: 0.5
-      value: {fileID: 21300000, guid: 3163d0f5c3d5c1e4aa9bc1d7bcb42391, type: 3}
-    - time: 0.56666666
-      value: {fileID: 21300000, guid: 477720258137ce34598831590dc45289, type: 3}
-    - time: 0.6166667
-      value: {fileID: 21300000, guid: 8e676323893d6ca499010d54ad5e46a3, type: 3}
-    - time: 0.65
-      value: {fileID: 21300000, guid: ac4d08cdd191a454690820291d79b7dd, type: 3}
-    - time: 0.7
-      value: {fileID: 21300000, guid: 68e6dea5ceaea8649acf9b4d6c84de16, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -80,18 +68,12 @@ AnimationClip:
     - {fileID: 21300000, guid: 65bb8bd762919104bacd359b86844df5, type: 3}
     - {fileID: 21300000, guid: 219a5c3d5909928469a0d4438bd27143, type: 3}
     - {fileID: 21300000, guid: 36ed43b4efaed03468f053f7c4111a97, type: 3}
-    - {fileID: 21300000, guid: c32ab19c4645c9d42b507d9c7f25c8fe, type: 3}
-    - {fileID: 21300000, guid: 3163d0f5c3d5c1e4aa9bc1d7bcb42391, type: 3}
-    - {fileID: 21300000, guid: 477720258137ce34598831590dc45289, type: 3}
-    - {fileID: 21300000, guid: 8e676323893d6ca499010d54ad5e46a3, type: 3}
-    - {fileID: 21300000, guid: ac4d08cdd191a454690820291d79b7dd, type: 3}
-    - {fileID: 21300000, guid: 68e6dea5ceaea8649acf9b4d6c84de16, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.71666664
+    m_StopTime: 0.43333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -110,4 +92,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.41666666
+    functionName: StartDisappear
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

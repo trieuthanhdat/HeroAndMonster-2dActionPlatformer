@@ -69,16 +69,17 @@ namespace RPG.Resources
             return GetComponent<BaseStats>().GetStats(Stats.Stats.health);
         }
        
-        public void TakeDamage(GameObject instigator, float damage, Animator targetDamage = null)
+        public void TakeDamage(float damage,GameObject instigator = null, Animator targetDamage = null)
         {
             // debug
-
             healthPoints.value = Mathf.Max(healthPoints.value - damage, 0);
             if(targetDamage) targetDamage.SetTrigger("Hurt");
             if(IsDead())
             {
-                OnDie.Invoke();
-                AwardExperience(instigator);
+                OnDie?.Invoke();
+                if(instigator)
+                    if(instigator.CompareTag("Player"))
+                        AwardExperience(instigator);
             }else
             {
                 receiveDamage.Invoke(damage);

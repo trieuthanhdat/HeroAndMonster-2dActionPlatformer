@@ -28,7 +28,7 @@ namespace RPG.Combat
             }
             if(collided)
             {     
-                enemyHealth.TakeDamage(GameObject.FindGameObjectWithTag("Player").gameObject, damageAmount);
+                enemyHealth.TakeDamage( damageAmount,GameObject.FindGameObjectWithTag("Player").gameObject);
                 enabled = false;
             }
             

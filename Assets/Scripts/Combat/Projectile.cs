@@ -68,7 +68,7 @@ public class Projectile : MonoBehaviour
         {
             Destroy(obj);
         }
-        target.TakeDamage(instigator, damage); 
+        target.TakeDamage( damage,instigator); 
 
         //Destroy the rest of the Projectile object after a life time, 
         //so that the trail can continue to live up its path-life 

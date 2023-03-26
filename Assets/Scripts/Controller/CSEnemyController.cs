@@ -38,7 +38,7 @@ public class CSEnemyController : IAIController
     private bool doOnce = false;
     private int faceDirection = 1;
 
-    
+    private Health playerHealth;
 
     public override void Start()
     {
@@ -49,7 +49,7 @@ public class CSEnemyController : IAIController
         groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_HeroKnight>();
         enemySprite = GetComponent<SpriteRenderer>();
         health = GetComponent<Health>();
-
+        playerHealth = playerTransform.GetComponent<Health>();
     }
  
     public override void Update()
@@ -60,6 +60,13 @@ public class CSEnemyController : IAIController
     public override void FixedUpdate()
     {
         if (health.IsDead()) return;
+
+        // if(playerHealth.IsDead()) 
+        // {
+        //     attacking = false;
+        //     chasingPlayer = false;
+        // }
+
         if (chasingPlayer)
         {
             if(hasJustMoveAway)
@@ -135,7 +142,7 @@ public class CSEnemyController : IAIController
         if(CanSeePlayer())
             targetPosition = playerTransform.position;
 
-        GetComponent<SpriteRenderer>().flipX = targetPosition.x > transform.position.x;
+        transform.localScale =new Vector2( targetPosition.x > transform.position.x ? -1 : 1, transform.localScale.y);
         sensorAttackPoints.transform.localScale = new Vector2(targetPosition.x > transform.position.x? -1 : 1, sensorAttackPoints.transform.localScale.y);
     }
 
@@ -212,6 +219,7 @@ public class CSEnemyController : IAIController
 
     public override void AttackPlayer()
     {
+       
         // Check if the AI can still see the player
         if (CanSeePlayer())
         {
@@ -338,8 +346,8 @@ public class CSEnemyController : IAIController
     ///----ANIMATION EVENTS HANDLER----///
     public override void HandleHit()
     {
-        if(playerTarget)
-            playerTarget.TakeDamage(playerTransform.gameObject,attackDamage, playerTransform.GetComponent<HeroKnight>().HeroAnimator);
+        if(playerHealth && !playerHealth.IsDead())
+            playerHealth.TakeDamage(attackDamage,playerTransform.gameObject, playerTransform.GetComponent<HeroKnight>().HeroAnimator);
     }
 
 }
