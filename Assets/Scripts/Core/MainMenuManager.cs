@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager :MonoBehaviour
 {
-
+    public OptionsManager optionsManager;
     public GameObject mainMenuPanel;
     public GameObject optionsPanel;
     public GameObject confirmExitPanel;
@@ -22,6 +22,7 @@ public class MainMenuManager :MonoBehaviour
         confirmExitPanel.SetActive(false);
         confirmNewGamePanel.SetActive(false);
         isGamePaused = false;
+        optionsManager.CheckBgmToggle();
         MonoAudioManager.instance.PlaySound("LoadingBG", true, true);
     }
 

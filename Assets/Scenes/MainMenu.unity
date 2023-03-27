@@ -289,11 +289,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2652241238112631960, guid: b6a21bb95c2a00747820121a3a778990,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -427.10016
-      objectReference: {fileID: 0}
     - target: {fileID: 3632040524215541912, guid: b6a21bb95c2a00747820121a3a778990,
         type: 3}
       propertyPath: m_Pivot.x
@@ -414,11 +409,6 @@ PrefabInstance:
       propertyPath: bgmAudioSource
       value: 
       objectReference: {fileID: 1230521927}
-    - target: {fileID: 3632040524624697330, guid: b6a21bb95c2a00747820121a3a778990,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6a21bb95c2a00747820121a3a778990, type: 3}
 --- !u!1001 &3743233023028642670
@@ -487,6 +477,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5762307235389913404, guid: 7199bf26e748fa240b26ba7afc3feec6,
+        type: 3}
+      propertyPath: sounds.Array.data[5].fadeOutTimer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5762307235389913404, guid: 7199bf26e748fa240b26ba7afc3feec6,
+        type: 3}
+      propertyPath: sounds.Array.data[6].fadeOutTimer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7199bf26e748fa240b26ba7afc3feec6, type: 3}

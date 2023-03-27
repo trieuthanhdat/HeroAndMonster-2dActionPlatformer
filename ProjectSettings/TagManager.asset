@@ -9,6 +9,9 @@ TagManager:
   - Enemy
   - BoundEdge
   - Ground
+  - PausePanel
+  - LosePanel
+  - WinPanel
   layers:
   - Default
   - TransparentFX

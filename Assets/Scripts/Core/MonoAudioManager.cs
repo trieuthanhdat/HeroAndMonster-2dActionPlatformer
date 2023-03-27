@@ -28,15 +28,45 @@ public class Sound
     public MonoAudioPlayer player;
 }
 
-public class MonoAudioManager : MonoSingleton<MonoAudioManager>
+public class MonoAudioManager : MonoBehaviour
 {
+    private static MonoAudioManager _instance;
+
+    private int score;
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        _instance = this;
+        DontDestroyOnLoad(this.gameObject);
+    }
+
+    public static MonoAudioManager instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                GameObject singletonObject = new GameObject();
+                _instance = singletonObject.AddComponent<MonoAudioManager>();
+            }
+
+            return _instance;
+        }
+    }
     [SerializeField] MonoAudioPlayer audioPlayerPrefabs;
     [SerializeField] Sound[] sounds;
 
     bool isGradient = false;
     int gradientSoundIndex = -1;
     float time = 0;
-    private void Awake()
+    AudioSource currentBGSound;
+    private void Start()
     {
         foreach(Sound s in sounds)
         {
@@ -88,16 +118,22 @@ public class MonoAudioManager : MonoSingleton<MonoAudioManager>
         foreach(Sound s in sounds)
         {
             if(s.name.Contains("BG"))
-                s.audioSrc.Pause();
+                if(s.audioSrc.isPlaying)
+                {
+                    currentBGSound = s.audioSrc;
+                    s.audioSrc.Pause();
+                }
+                    
         }
     }
-    public void EnableAllBGSound()
+    public void EnableCurrentBGSound()
     {
-            foreach(Sound s in sounds)
-            {
-                if(s.name.Contains("BG"))
+        foreach(Sound s in sounds)
+        {
+            if(s.name.Contains("BG"))
+                if(currentBGSound == s.audioSrc)
                     s.audioSrc.Play();
-            }
+        }
     }
 
 }

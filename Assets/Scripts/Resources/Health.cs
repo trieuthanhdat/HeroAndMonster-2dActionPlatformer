@@ -100,6 +100,8 @@ namespace RPG.Resources
         }
         public float CalculateFraction()
         {
+            if(IsDead())
+                return 0;
             return GetHealthPoint() / GetComponent<BaseStats>().GetStats(Stats.Stats.health);
         }
         public float GetHealthRate()

@@ -72,8 +72,6 @@ public class SnailEnemyAIController : IAIController
     }
     public bool IsDead()
     {
-        if(!health)
-            return false;
          return health.IsDead();
     }
     public override void Start()
@@ -115,10 +113,7 @@ public class SnailEnemyAIController : IAIController
     {
         // Update the current state based on the enemy's behavior
         if(firstAppeared == false) return;
-        if(health.IsDead()) 
-        {
-            return;
-        }
+       
         CheckGrounded();
         Timer();
         switch (currentState)

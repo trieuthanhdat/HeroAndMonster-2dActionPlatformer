@@ -84,7 +84,7 @@ AnimationClip:
     messageOptions: 0
   - time: 0.11666667
     functionName: PlaySoundEFFWithName
-    data: Atack3
+    data: Attack3
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

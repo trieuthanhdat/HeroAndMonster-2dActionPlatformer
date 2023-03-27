@@ -9,7 +9,7 @@ using System.Collections.Generic;
 public class CSEnemyController : IAIController
 {
    [SerializeField] Transform[] patrolPoints;
-    [SerializeField] Transform groundFowardCheck;
+    // [SerializeField] Transform groundFowardCheck;
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float stopTime = 2f;
     [SerializeField] float lookAroundTime = 3f;
@@ -19,8 +19,8 @@ public class CSEnemyController : IAIController
     [SerializeField] float attackRate = 5f;
     [SerializeField] float attackDamage = 7f;
     [SerializeField] LayerMask playerLayer;
-    [SerializeField] LayerMask whatIsGround;
-    [SerializeField] private float groundCheckDistance;
+    // [SerializeField] LayerMask whatIsGround;
+    // [SerializeField] private float groundCheckDistance;
     [SerializeField] Sensor_AttackPoint sensorAttackPoints;
 
     private int currentPatrolPointIndex = 0;
@@ -73,9 +73,9 @@ public class CSEnemyController : IAIController
 
         if (chasingPlayer )
         {
-            if(hasJustMoveAway)
-                Invoke("ChasePlayer", 0.8f);
-            else
+            // if(hasJustMoveAway)
+            //     Invoke("ChasePlayer", 0.8f);
+            // else
                 ChasePlayer();
         }
         else if (attacking  )
@@ -111,15 +111,10 @@ public class CSEnemyController : IAIController
             grounded = false;
             animator.SetBool("Grounded", grounded);
         }
-        CheckGroundCollision();
 
     }
 
-    private void CheckGroundCollision()
-    {
-        groundForward = Physics2D.Raycast(groundFowardCheck.position,Vector2.down, groundCheckDistance, whatIsGround);
-        Debug.Log("GROUNDFWRD CHECKED "+ groundForward);
-    }
+   
 
     public override void Patrol()
     {

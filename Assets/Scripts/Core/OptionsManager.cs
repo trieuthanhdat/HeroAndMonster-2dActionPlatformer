@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,17 +23,27 @@ public class OptionsManager : MonoBehaviour
 
         isBgmOn = true;
         isSfxOn = true;
-
-        bgmToggle.isOn = true;
-        sfxToggle.isOn = true;
-
         // bgmSlider.value = bgmAudioSource.volume;
-        
-
         // bgmSlider.onValueChanged.AddListener(SetBgmVolume);
         // sfxSlider.onValueChanged.AddListener(SetSfxVolume);
+        CheckBgmToggle();
+       
     }
-    
+
+    public void CheckBgmToggle()
+    {
+       if (isBgmOn)
+        {
+            bgmAudioSource.Pause();
+            MonoAudioManager.instance.DisableAllBGSound();
+        }
+        else
+        {
+            bgmAudioSource.Play();
+            MonoAudioManager.instance.EnableCurrentBGSound();
+        }
+    }
+
     public void ToggleBgm()
     {
         if (isBgmOn)
@@ -43,7 +54,7 @@ public class OptionsManager : MonoBehaviour
         else
         {
             bgmAudioSource.Play();
-            MonoAudioManager.instance.EnableAllBGSound();
+            MonoAudioManager.instance.EnableCurrentBGSound();
         }
         isBgmOn = !isBgmOn;
     }

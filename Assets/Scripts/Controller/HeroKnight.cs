@@ -52,11 +52,7 @@ public class HeroKnight : MonoBehaviour {
         m_body2d = GetComponent<Rigidbody2D>();
         m_health = GetComponent<Health>();
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_HeroKnight>();
-        m_wallSensorR1 = transform.Find("WallSensor_R1").GetComponent<Sensor_HeroKnight>();
-        m_wallSensorR2 = transform.Find("WallSensor_R2").GetComponent<Sensor_HeroKnight>();
-        m_wallSensorL1 = transform.Find("WallSensor_L1").GetComponent<Sensor_HeroKnight>();
-        m_wallSensorL2 = transform.Find("WallSensor_L2").GetComponent<Sensor_HeroKnight>();
-
+      
         m_sensorAttackPoints = m_AttackPointHolder.GetComponentsInChildren<Sensor_AttackPoint>().ToList();
     }
 
@@ -70,7 +66,7 @@ public class HeroKnight : MonoBehaviour {
     }
     public void Kill()
     {
-         Destroy(gameObject);
+        gameObject.SetActive(false);
     }
     public Vector2 GetLastPosition()
     {
@@ -184,6 +180,7 @@ public class HeroKnight : MonoBehaviour {
     }
     public void HandleHurt(float damage)
     {
+        if(m_health.IsDead()) return;
         m_animator.SetTrigger("Hurt");
         m_health.TakeDamage(damage);
     }

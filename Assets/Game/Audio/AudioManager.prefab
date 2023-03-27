@@ -191,7 +191,7 @@ MonoBehaviour:
   - name: GameplayBG
     clip: {fileID: 8300000, guid: d08908ace4ed44747bd8948f779d2252, type: 3}
     playOnAwake: 0
-    volume: 1
+    volume: 0.5
     pitch: 1
     fadeInTimer: 20
     fadeOutTimer: 10
@@ -202,7 +202,7 @@ MonoBehaviour:
   - name: LoadingBG
     clip: {fileID: 8300000, guid: 8e391c12e1062d542873e247bbb687a5, type: 3}
     playOnAwake: 0
-    volume: 1
+    volume: 0.5
     pitch: 1
     fadeInTimer: 20
     fadeOutTimer: 10
@@ -213,7 +213,7 @@ MonoBehaviour:
   - name: SplashCreenBG
     clip: {fileID: 8300000, guid: 3646ce852ecd0444daed272caa53d64a, type: 3}
     playOnAwake: 0
-    volume: 1
+    volume: 0.5
     pitch: 1
     fadeInTimer: 20
     fadeOutTimer: 10
@@ -476,6 +476,28 @@ MonoBehaviour:
     player: {fileID: 0}
   - name: PlayerAttackHit3
     clip: {fileID: 8300000, guid: b6fb3cb3bb6c04842876b15cb23855d1, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: Pop
+    clip: {fileID: 8300000, guid: 9cd980993787e714daaad093cd5cdbf4, type: 3}
+    playOnAwake: 0
+    volume: 1
+    pitch: 1
+    fadeInTimer: 20
+    fadeOutTimer: 10
+    audioSrc: {fileID: 0}
+    isFadeIntGradient: 0
+    isFadeOutGradient: 0
+    player: {fileID: 0}
+  - name: BossTheme
+    clip: {fileID: 8300000, guid: b05918be746b6e2488d494ea96f1c9c4, type: 3}
     playOnAwake: 0
     volume: 1
     pitch: 1
